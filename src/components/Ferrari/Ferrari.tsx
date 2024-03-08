@@ -1,12 +1,12 @@
+// Hennessey.tsx
 import * as React from 'react';
 import { Container, Grid, Card, CardMedia, CardContent, Typography, Box } from '@mui/material';
 import { NavBar } from '../sharedComponents/NavBar';
 
-// Updated Porsche image imports
-import porscheLogo from '../../assets/images/porsche_green_logo.png';
-import porsche911Turbo from '../../assets/images/porsche_911_turbo.png';
-import porsche918 from '../../assets/images/porsche_918.png';
-import porscheGemballaMirageGT from '../../assets/images/porsche_gemballa_mirage_gt.png';
+import ferrariLogo from '../../assets/images/ferrari_green_logo.png';
+import ferrariSF90Green from '../../assets/images/ferrari_green_sf90.png';
+import ferrariSF90Black from '../../assets/images/ferrari_sf90_black.png';
+import ferrariSF90White from '../../assets/images/ferrari_white_sf90.png';
 import background from '../../assets/images/black_green_honeycomb.png';
 
 interface CarModel {
@@ -15,14 +15,13 @@ interface CarModel {
   price: string;
 }
 
-// Updated carModels array for Porsche
 const carModels: CarModel[] = [
-  { name: 'Porsche 911 Turbo S', image: porsche911Turbo, price: '$275,000' },
-  { name: 'Porsche Carrera GT', image: porscheGemballaMirageGT, price: '$1,750,000' },
-  { name: 'Porsche 918', image: porsche918, price: '$1,999,000' },
+  { name: 'Ferrari SF90', image: ferrariSF90Green, price: '$700,000' },
+  { name: 'Ferrari SF90', image: ferrariSF90Black, price: '$750,000' },
+  { name: 'Ferrari SF90', image: ferrariSF90White, price: '$725,000' },
 ];
 
-const Porsche: React.FC = () => {
+const Hennessey: React.FC = () => {
   return (
     <Box sx={{
       backgroundImage: `url(${background})`,
@@ -35,7 +34,7 @@ const Porsche: React.FC = () => {
         <div style={{
           width: '100%',
           height: '150px',
-          backgroundImage: `url(${porscheLogo})`,
+          backgroundImage: `url(${ferrariLogo})`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
@@ -86,7 +85,7 @@ const Porsche: React.FC = () => {
       </Container>
       <Typography sx={{
         fontSize: '1rem',
-        color: 'lime',
+        color: '#00be00', // Keep this color as specified
         fontWeight: 'bold',
         position: 'absolute',
         bottom: '5px',
@@ -99,4 +98,4 @@ const Porsche: React.FC = () => {
   );
 };
 
-export default Porsche;
+export default Hennessey;

@@ -38,3 +38,9 @@ export const useGetOrder = (): GetOrderDataProps => {
     useEffect( () => { handleDataFetch() }, [])
     return { orderData, getData: handleDataFetch }
 }
+
+// Inside your customHooks.ts or a relevant file
+
+export interface CreateOrderProps {
+    order: ShopProps[];
+}

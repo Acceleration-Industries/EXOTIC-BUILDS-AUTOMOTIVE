@@ -37,8 +37,8 @@ export const Home = (props: Props) => {
                 </video>
                 <MainText>
                     <Typography variant='h4'>{props.title}</Typography>
-                    <Button sx={{ marginTop: '10px' }} component={Link} to={myAuth === 'true' ? "/shop" : "/auth"} variant='contained'>
-                       BROWSE OUR STORE
+                    <Button sx={{ marginTop: '5px' }} component={Link} to={myAuth === 'true' ? "/shop" : "/auth"} variant='contained'>
+                      Shop Performance Parts
                     </Button>
                 </MainText>
             </Main>

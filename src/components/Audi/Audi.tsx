@@ -1,12 +1,13 @@
+// Audi.tsx
 import * as React from 'react';
 import { Container, Grid, Card, CardMedia, CardContent, Typography, Box } from '@mui/material';
 import { NavBar } from '../sharedComponents/NavBar';
 
-// Updated Porsche image imports
-import porscheLogo from '../../assets/images/porsche_green_logo.png';
-import porsche911Turbo from '../../assets/images/porsche_911_turbo.png';
-import porsche918 from '../../assets/images/porsche_918.png';
-import porscheGemballaMirageGT from '../../assets/images/porsche_gemballa_mirage_gt.png';
+// Update imports for Audi images
+import audiLogo from '../../assets/images/audi_awesome_logo.png';
+import audiR8White from '../../assets/images/audi_r8_white.png';
+import audiR8Red from '../../assets/images/audi_r8_red.png';
+import audiR8Racecar from '../../assets/images/audi_r8_racecar.png';
 import background from '../../assets/images/black_green_honeycomb.png';
 
 interface CarModel {
@@ -15,14 +16,14 @@ interface CarModel {
   price: string;
 }
 
-// Updated carModels array for Porsche
+// Update the carModels array with the Audi data
 const carModels: CarModel[] = [
-  { name: 'Porsche 911 Turbo S', image: porsche911Turbo, price: '$275,000' },
-  { name: 'Porsche Carrera GT', image: porscheGemballaMirageGT, price: '$1,750,000' },
-  { name: 'Porsche 918', image: porsche918, price: '$1,999,000' },
+  { name: 'Audi R8', image: audiR8Red, price: '$180,000' },
+  { name: 'Audi R8', image: audiR8White, price: '$225,000' },
+  { name: 'Audi R8 Racecar', image: audiR8Racecar, price: '$219,000' },
 ];
 
-const Porsche: React.FC = () => {
+const Audi: React.FC = () => {
   return (
     <Box sx={{
       backgroundImage: `url(${background})`,
@@ -35,7 +36,7 @@ const Porsche: React.FC = () => {
         <div style={{
           width: '100%',
           height: '150px',
-          backgroundImage: `url(${porscheLogo})`,
+          backgroundImage: `url(${audiLogo})`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
@@ -86,7 +87,7 @@ const Porsche: React.FC = () => {
       </Container>
       <Typography sx={{
         fontSize: '1rem',
-        color: 'lime',
+        color: '#00be00', // Keep or update this color as needed
         fontWeight: 'bold',
         position: 'absolute',
         bottom: '5px',
@@ -99,4 +100,4 @@ const Porsche: React.FC = () => {
   );
 };
 
-export default Porsche;
+export default Audi;

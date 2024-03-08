@@ -18,9 +18,10 @@ font-family: 'Drius', sans-serif;
 body {
   /* background-image: url('./assets/images/cool_green.jpg'); */
   background-color: black;
-  background-size: cover;
+  /* background-size: cover;
   background-attachment: fixed;
   background-position: center;
-  min-height: 100vh;
+  min-height: 100vh; */
+  * {cursor: url(https://cur.cursors-4u.net/cursors/cur-4/cur303.ani), url(https://cur.cursors-4u.net/cursors/cur-4/cur303.png), auto !important;}
 }
 

@@ -1,12 +1,13 @@
+// Bugatti.tsx
 import * as React from 'react';
 import { Container, Grid, Card, CardMedia, CardContent, Typography, Box } from '@mui/material';
 import { NavBar } from '../sharedComponents/NavBar';
 
-// Updated Porsche image imports
-import porscheLogo from '../../assets/images/porsche_green_logo.png';
-import porsche911Turbo from '../../assets/images/porsche_911_turbo.png';
-import porsche918 from '../../assets/images/porsche_918.png';
-import porscheGemballaMirageGT from '../../assets/images/porsche_gemballa_mirage_gt.png';
+// Update the imports to the new Bugatti images
+import bugattiLogo from '../../assets/images/bugatti_logo.png';
+import bugattiChironMean from '../../assets/images/bugatti_chiron_meean.png';
+import bugattiChironRed from '../../assets/images/bugatti_chiron_red.png';
+import bugattiVeyron from '../../assets/images/bugatti_veyron.png';
 import background from '../../assets/images/black_green_honeycomb.png';
 
 interface CarModel {
@@ -15,14 +16,14 @@ interface CarModel {
   price: string;
 }
 
-// Updated carModels array for Porsche
+// Update the carModels array with the Bugatti data
 const carModels: CarModel[] = [
-  { name: 'Porsche 911 Turbo S', image: porsche911Turbo, price: '$275,000' },
-  { name: 'Porsche Carrera GT', image: porscheGemballaMirageGT, price: '$1,750,000' },
-  { name: 'Porsche 918', image: porsche918, price: '$1,999,000' },
+  { name: 'Bugatti Chiron', image: bugattiChironMean, price: '$3,600,000' },
+  { name: 'Bugatti Chiron', image: bugattiChironRed, price: '$3,600,000' },
+  { name: 'Bugatti Veyron', image: bugattiVeyron, price: '$2,000,000' },
 ];
 
-const Porsche: React.FC = () => {
+const Bugatti: React.FC = () => {
   return (
     <Box sx={{
       backgroundImage: `url(${background})`,
@@ -35,7 +36,7 @@ const Porsche: React.FC = () => {
         <div style={{
           width: '100%',
           height: '150px',
-          backgroundImage: `url(${porscheLogo})`,
+          backgroundImage: `url(${bugattiLogo})`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
@@ -86,7 +87,7 @@ const Porsche: React.FC = () => {
       </Container>
       <Typography sx={{
         fontSize: '1rem',
-        color: 'lime',
+        color: '#00be00', // Update this if needed per your instructions
         fontWeight: 'bold',
         position: 'absolute',
         bottom: '5px',
@@ -99,4 +100,4 @@ const Porsche: React.FC = () => {
   );
 };
 
-export default Porsche;
+export default Bugatti;

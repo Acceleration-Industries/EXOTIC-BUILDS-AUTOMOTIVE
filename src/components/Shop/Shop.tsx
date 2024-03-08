@@ -1,7 +1,6 @@
-// exoticbuildsautomotive_website\src\components\Shop\Shop.tsx
-import * as _React from 'react';
 import { useState } from 'react';
-type MessageType = 'error' | 'warning' | 'info' | 'success';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { getDatabase, ref, push } from 'firebase/database';
 import {
     Box,
     Typography,
@@ -20,22 +19,29 @@ import {
     AccordionSummary,
     AccordionDetails
 } from '@mui/material';
-import { useForm, SubmitHandler } from 'react-hook-form';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { getDatabase, ref, push } from 'firebase/database';
+import backgroundImage from '../../assets/images/Cool-Green-and-Black-Wallpaper-Free-Download.jpg';
 import { useGetShop, ShopProps } from '../../customHooks';
 import { NavBar, InputText } from '../sharedComponents';
 import { theme } from '../../Theme/themes';
-import {  } from '../Auth';
+
+type MessageType = 'error' | 'warning' | 'info' | 'success';
 export interface SubmitProps {
     quantity: string;
 }
 interface CartProps {
     cartItem: ShopProps;
 }
+
 export const shopStyles = {
     main: {
-   
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        minHeight: '1080',
+        width: '1920',
+        backgroundAttachment: 'fixed',
     },
     grid: {
         marginTop: '25px',
@@ -62,28 +68,20 @@ export const shopStyles = {
         borderRadius: '10px',
     },
     button: {
-        color: '',
         borderRadius: '50px',
         height: '45px',
         width: '250px',
-        marginTop: '10px'
+        marginTop: '10px',
+
     },
     stack: {
         width: '75%',
         marginLeft: 'auto',
         marginRight: 'auto'
     },
-    stack2: {
-        border: '1px solid',
-        borderColor: theme.palette.primary.main,
-        borderRadius: '50px',
-        width: '100%',
-        marginTop: '10px'
-    },
     typography: {
         marginLeft: '15vw',
         color: "white",
-      
     }
 };
 const AddToCart = (cart: CartProps) => {

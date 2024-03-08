@@ -3,97 +3,59 @@ import { useNavigate } from 'react-router-dom';
 import {
     AppBar, Toolbar, IconButton, Typography, Button, Drawer, ListItemButton, List, ListItemText, Divider, Box, ListItemIcon,
 } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
-import TuneIcon from '@mui/icons-material/Tune';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { signOut, getAuth } from 'firebase/auth';
-import { theme } from '../../../Theme/themes';
+import { Theme, SxProps } from '@mui/system';
+import menuIcon from '../../../assets/images/green_menu_coin.png';
+import homeIcon from '../../../assets/images/green_temple_home.png';
+import performancePartsIcon from '../../../assets/images/hd_turbo.png';
+import shopExoticsIcon from '../../../assets/images/shop_exotics_icon.png';
+import cartIcon from '../../../assets/images/green_hd_cart.png';
+import { signOut, getAuth, Auth } from 'firebase/auth';
 import logo from '../../../assets/images/EXOTIC_BUILDS_LOGO.png';
 
+type NavLink = {
+    text: string;
+    icon: JSX.Element | null;
+    onClick: () => void;
+};
 
-const drawerWidth = 240;
+const drawerWidth = 300;
+const navStyles: { [key: string]: SxProps<Theme> } = {
 
-const navStyles = {
-    appBar: {
-        backgroundColor: "#000000",
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-    },
-    appBarShift: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: drawerWidth,
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    hide: {
-        display: 'none',
-    },
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0,
-    },
-    drawerPaper: {
-        width: drawerWidth,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-    },
-    drawerHeader: {
-        display: 'flex',
-        alignItems: 'center',
-        padding: theme.spacing(0, 1),
-        ...theme.mixins.toolbar,
-        justifyContent: 'flex-end',
-    },
 };
 
 export const NavBar: React.FC = () => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState<boolean>(false);
     const navigate = useNavigate();
-    const auth = getAuth();
-    const myAuth = localStorage.getItem('auth');
+    const auth: Auth = getAuth();
+    const myAuth: string | null = localStorage.getItem('auth');
 
     const handleDrawerOpen = () => setOpen(true);
     const handleDrawerClose = () => setOpen(false);
 
-    const navLinks = [
+    const navLinks: NavLink[] = [
         {
             text: 'Home',
-            icon: <DirectionsCarIcon />,
+            icon: <Box component="img" src={homeIcon} alt="Home" sx={{ width: 70, height: 80, marginRight: 5.5, marginLeft: 3.5, }} />,
             onClick: () => navigate('/'),
         },
         {
-            text: myAuth === 'true' ? 'Shop' : 'Sign In',
-            icon: myAuth === 'true' ? <TuneIcon /> : <ExitToAppIcon />,
+            text: myAuth === 'true' ? 'Parts' : 'Sign In',
+            icon: myAuth === 'true' ? <Box component="img" src={performancePartsIcon} alt="Performance Parts" sx={{ width: 80, height: 65, marginRight: 6, marginLeft: 2, }} /> : <Box component="img" src={homeIcon} alt="Sign In" sx={{ width: 24, height: 24 }} />,
             onClick: () => navigate(myAuth === 'true' ? '/shop' : '/auth'),
         },
         {
+            text: 'Exotics',
+            icon: <Box component="img" src={shopExoticsIcon} alt="Shop Exotics" sx={{ width: 120, height: 55, marginRight: 3, }} />,
+            onClick: () => navigate('/makes'),
+        },
+        {
             text: myAuth === 'true' ? 'Cart' : '',
-            icon: myAuth === 'true' ? <ShoppingCartIcon /> : null,
+            icon: myAuth === 'true' ? <Box component="img" src={cartIcon} alt="Cart" sx={{ width: 85, height: 60, marginRight: 6, marginLeft: 2, }} /> : null,
             onClick: myAuth === 'true' ? () => navigate('/cart') : () => { },
         },
-        // Updated entry for "Shop Exotics"
-        {
-            text: 'Shop Exotics',
-            icon: <DirectionsCarIcon />,
-            onClick: () => navigate('/makes'), // This line was updated to match the route to Makes.tsx
-        },
     ];
-    
 
-    let buttonText = myAuth === 'true' ? 'Sign Out' : 'Sign In';
+    let buttonText: string = myAuth === 'true' ? 'Sign Out' : 'Sign In';
 
     const signInButton = async () => {
         if (myAuth === 'false') {
@@ -109,7 +71,11 @@ export const NavBar: React.FC = () => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="fixed" sx={open ? navStyles.appBarShift : navStyles.appBar}>
+            <AppBar position="fixed" sx={{
+                ...((open ? navStyles.appBarShift : navStyles.appBar) || {}),
+                borderBottom: '2px solid lime',
+            }}>
+
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -121,8 +87,14 @@ export const NavBar: React.FC = () => {
                             color: 'lime',
                         }}
                     >
-                        <MenuIcon />
+                        <Box
+                            component="img"
+                            src={menuIcon}
+                            alt="Menu"
+                            sx={{ width: 50, height: 50 }}
+                        />
                     </IconButton>
+
                     <Typography
                         variant="subtitle1"
                         noWrap
@@ -133,6 +105,8 @@ export const NavBar: React.FC = () => {
                             alignItems: 'center',
                             color: 'lime',
                             textShadow: '2px 2px 4px black',
+                            fontSize: '30px',
+                            marginLeft: '500px',
                         }}
                     >
                         EXOTIC BUILDS AUTOMOTIVE
@@ -140,13 +114,14 @@ export const NavBar: React.FC = () => {
                             component="img"
                             src={logo}
                             sx={{
-                                height: 30,
-                                marginLeft: 2,
+                                height: 50,
+                                marginLeft: 33,
                                 filter: 'drop-shadow(2px 2px 4px black)',
                             }}
                             alt="Exotic Builds Logo"
                         />
                     </Typography>
+
                     <Button
                         color="primary"
                         onClick={signInButton}
@@ -185,15 +160,21 @@ export const NavBar: React.FC = () => {
                 open={open}
             >
                 <Box sx={{ justifyContent: 'flex-end' }}>
-                    <IconButton onClick={handleDrawerClose} sx={{ color: 'lime' }}> {}
-                        <MenuIcon />
+                    <IconButton onClick={handleDrawerClose} sx={{ color: 'lime' }}>
+                        <Box
+                            component="img"
+                            src={menuIcon}
+                            alt="Menu"
+                            sx={{ width: 50, height: 50 }}
+                        />
                     </IconButton>
                 </Box>
-                <Divider sx={{ borderColor: 'lime' }} /> {}
+
+                <Divider sx={{ borderColor: 'lime' }} />
                 <List>
                     {navLinks.map(({ text, icon, onClick }) => (
                         <ListItemButton key={text} onClick={onClick}>
-                            {icon && <ListItemIcon sx={{ color: 'lime' }}>{icon}</ListItemIcon>} {}
+                            {icon && <ListItemIcon sx={{ color: 'lime' }}>{icon}</ListItemIcon>}
                             <ListItemText primary={text} />
                         </ListItemButton>
                     ))}

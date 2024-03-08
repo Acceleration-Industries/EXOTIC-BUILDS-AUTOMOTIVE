@@ -46,7 +46,14 @@ export const Makes: React.FC = () => {
   const navigate = useNavigate();
 
   const handleCarSelect = (carMake: string) => {
-    navigate(`/${carMake.toLowerCase()}`);
+
+    if (carMake === 'Aston Martin') {
+
+      navigate(`/astonmartin`);
+    } else {
+ 
+      navigate(`/${carMake.toLowerCase()}`);
+    }
   };
 
   return (
@@ -65,8 +72,9 @@ export const Makes: React.FC = () => {
           <Grid item key={carMake.name} sx={{ display: 'flex', justifyContent: 'center' }}>
             <Card
               sx={{
-                width: '351px',
-                height: '269px',
+                width: '341px',
+                height: '249px',
+                paddingTop: '20px',
                 backgroundColor: 'black',
                 color: 'white',
                 border: '1px solid white',

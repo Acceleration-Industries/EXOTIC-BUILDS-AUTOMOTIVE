@@ -1,12 +1,13 @@
+// AstonMartin.tsx
 import * as React from 'react';
 import { Container, Grid, Card, CardMedia, CardContent, Typography, Box } from '@mui/material';
 import { NavBar } from '../sharedComponents/NavBar';
 
-// Updated Porsche image imports
-import porscheLogo from '../../assets/images/porsche_green_logo.png';
-import porsche911Turbo from '../../assets/images/porsche_911_turbo.png';
-import porsche918 from '../../assets/images/porsche_918.png';
-import porscheGemballaMirageGT from '../../assets/images/porsche_gemballa_mirage_gt.png';
+// Importing Aston Martin images
+import astonLogo from '../../assets/images/astonmartin_green_logo2.png';
+import astonDB11 from '../../assets/images/aston_db11.png';
+import astonDBSSuperleggera from '../../assets/images/aston_dbs_superleggera.png';
+import astonVulcan from '../../assets/images/astonmartin_vulcan.png';
 import background from '../../assets/images/black_green_honeycomb.png';
 
 interface CarModel {
@@ -15,14 +16,14 @@ interface CarModel {
   price: string;
 }
 
-// Updated carModels array for Porsche
+
 const carModels: CarModel[] = [
-  { name: 'Porsche 911 Turbo S', image: porsche911Turbo, price: '$275,000' },
-  { name: 'Porsche Carrera GT', image: porscheGemballaMirageGT, price: '$1,750,000' },
-  { name: 'Porsche 918', image: porsche918, price: '$1,999,000' },
+  { name: 'Aston Martin DBS Superleggera', image: astonDBSSuperleggera, price: '$320,000' },
+  { name: 'Aston Martin DB11', image: astonDB11, price: '$215,000' },
+  { name: 'Aston Martin Vantage GT', image: astonVulcan, price: '$2,300,000' },
 ];
 
-const Porsche: React.FC = () => {
+const AstonMartin: React.FC = () => {
   return (
     <Box sx={{
       backgroundImage: `url(${background})`,
@@ -35,7 +36,7 @@ const Porsche: React.FC = () => {
         <div style={{
           width: '100%',
           height: '150px',
-          backgroundImage: `url(${porscheLogo})`,
+          backgroundImage: `url(${astonLogo})`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
@@ -86,7 +87,7 @@ const Porsche: React.FC = () => {
       </Container>
       <Typography sx={{
         fontSize: '1rem',
-        color: 'lime',
+        color: '#00be00', // Adjust this color as needed
         fontWeight: 'bold',
         position: 'absolute',
         bottom: '5px',
@@ -99,4 +100,4 @@ const Porsche: React.FC = () => {
   );
 };
 
-export default Porsche;
+export default AstonMartin;

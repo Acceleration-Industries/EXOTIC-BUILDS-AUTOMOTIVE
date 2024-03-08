@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material';
-const backgroundImageUrl = 'url("src\assets\images\cool_green.jpg")';
+
 export const theme = createTheme({
   typography: {
     fontFamily: "'Drius', sans-serif",
@@ -22,7 +22,7 @@ export const theme = createTheme({
         @import url('https://fonts.cdnfonts.com/css/drius');
         body {
           font-family: 'Drius', sans-serif;
-          background-image: ${backgroundImageUrl};
+     
           background-size: cover;
           background-attachment: fixed;
           background-position: center;

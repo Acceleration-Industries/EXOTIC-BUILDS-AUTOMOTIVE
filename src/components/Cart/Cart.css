@@ -1,0 +1,114 @@
+/* Cart.css */
+.card {
+    background-color: #121212; /* Dark background for card */
+    border: none;
+  }
+  
+  .card-img-top {
+    width: 100%; /* Responsive image width */
+    object-fit: cover; /* Cover fit for images */
+  }
+  
+  .card-title {
+    color: #00be00; /* Green text for card titles */
+  }
+  
+  .card-body, .card-footer {
+    background-color: #121212; /* Dark background for card body/footer */
+  }
+  
+  .btn-outline-secondary {
+    border-color: #00be00;
+    color: #00be00;
+  }
+  
+  .btn-outline-secondary:hover {
+    background-color: #00be00;
+    color: #000;
+  }
+  
+  .btn-outline-success {
+    border-color: #00be00;
+    color: #00be00;
+  }
+  
+  .btn-outline-success:hover {
+    background-color: #00be00;
+    color: #000;
+  }
+  
+  .btn-danger {
+    border-color: #dc3545;
+    color: black;
+  }
+  
+  .btn-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  .alert {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+  }
+  
+  .close {
+    font-size: 1.5rem;
+    color: #00be00;
+    opacity: 1;
+  }
+
+.btn-outline-secondary, .btn-outline-success {
+    border-color: #00be00;
+    color: #00be00;
+  }
+  
+  .btn-outline-secondary:hover, .btn-outline-success:hover {
+    background-color: #00be00;
+    color: #000;
+  }
+  
+
+  .alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+  }
+  
+  .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+  }
+  
+
+  .alert .close {
+    color: #000;
+    opacity: 0.75;
+  }
+  
+  .alert .close:hover {
+    color: #000;
+    opacity: 1;
+  }
+
+  .container {
+    font-family: 'Drius', sans-serif;
+  }
+  
+  h2 {
+    color: #00be00;
+    margin-bottom: 20px;
+  }
+  
+  /* You might need to adjust the path to your background image */
+  body {
+    background-image: url('./assets/images/cool_green.jpg');
+    background-color: #000; /* Fallback color if the image is not available */
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    min-height: 100vh;
+  }
+  
