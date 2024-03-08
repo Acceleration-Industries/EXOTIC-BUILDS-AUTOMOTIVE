@@ -35,22 +35,22 @@ export const NavBar: React.FC = () => {
     const navLinks: NavLink[] = [
         {
             text: 'Home',
-            icon: <Box component="img" src={homeIcon} alt="Home" sx={{ width: 70, height: 80, marginRight: 5.5, marginLeft: 3.5, }} />,
+            icon: <Box component="img" src={homeIcon} alt="Home" sx={{ width: 70, height: 80, marginRight: 5.5, marginLeft: 3.5, marginTop: 5, }} />,
             onClick: () => navigate('/'),
         },
         {
             text: myAuth === 'true' ? 'Parts' : 'Sign In',
-            icon: myAuth === 'true' ? <Box component="img" src={performancePartsIcon} alt="Performance Parts" sx={{ width: 80, height: 65, marginRight: 6, marginLeft: 2, }} /> : <Box component="img" src={homeIcon} alt="Sign In" sx={{ width: 24, height: 24 }} />,
+            icon: myAuth === 'true' ? <Box component="img" src={performancePartsIcon} alt="Performance Parts" sx={{ width: 80, height: 65, marginRight: 6, marginLeft: 2, marginTop: 5,  }} /> : <Box component="img" src={homeIcon} alt="Sign In" sx={{ width: 24, height: 24 }} />,
             onClick: () => navigate(myAuth === 'true' ? '/shop' : '/auth'),
         },
         {
             text: 'Exotics',
-            icon: <Box component="img" src={shopExoticsIcon} alt="Shop Exotics" sx={{ width: 120, height: 55, marginRight: 3, }} />,
+            icon: <Box component="img" src={shopExoticsIcon} alt="Shop Exotics" sx={{ width: 120, height: 55, marginRight: 3, marginTop: 5,  }} />,
             onClick: () => navigate('/makes'),
         },
         {
             text: myAuth === 'true' ? 'Cart' : '',
-            icon: myAuth === 'true' ? <Box component="img" src={cartIcon} alt="Cart" sx={{ width: 85, height: 60, marginRight: 6, marginLeft: 2, }} /> : null,
+            icon: myAuth === 'true' ? <Box component="img" src={cartIcon} alt="Cart" sx={{ width: 85, height: 60, marginRight: 6, marginLeft: 2, marginTop: 5, }} /> : null,
             onClick: myAuth === 'true' ? () => navigate('/cart') : () => { },
         },
     ];

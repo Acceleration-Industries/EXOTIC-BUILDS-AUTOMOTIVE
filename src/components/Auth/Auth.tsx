@@ -1,7 +1,7 @@
 import * as _React from 'react';
-import { useState } from 'react'; 
-
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth'; 
+import { useState } from 'react';
+import backgroundImage from '../../assets/images/custom_background_will_martin__exotic_builds_automotive_ferrari_sign_in.png';
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import {
     onAuthStateChanged,
     getAuth,
@@ -10,6 +10,11 @@ import {
 } from 'firebase/auth';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import emailIcon from '../../assets/images/email_icon.png';
+import emailSignupIcon from '../../assets/images/email_signup_icon.png';
+import googleIcon from '../../assets/images/google_button.png';
+export type MessageType = 'error' | 'warning' | 'info' | 'success';
+
 import {
     Box,
     Button,
@@ -17,34 +22,33 @@ import {
     Stack,
     Snackbar,
     CircularProgress,
-    Dialog, 
+    Dialog,
     DialogContent,
-    Alert 
+    Alert
 } from '@mui/material'
 import { NavBar, InputText, InputPassword } from '../sharedComponents';
 import backgroundVideo from '../../assets/images/Background - Made with Clipchamp (1).mp4';
 const VideoBackground = () => {
-  return (
-    <Box sx={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
-      <video autoPlay loop muted style={{ width: '100%', height: '100%', objectFit: 'cover' }}>
-        <source src={backgroundVideo} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      {}
-    </Box>
-  );
+    return (
+        <Box sx={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
+            <video autoPlay loop muted style={{ width: '100%', height: '100%', objectFit: 'cover' }}>
+                <source src={backgroundVideo} type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+            { }
+        </Box>
+    );
 };
 export default VideoBackground;
 const authStyles = {
     main: {
-        // backgroundImage: `linear-gradient(rgba(0,0,0, .3), rgba(0,0,0,.5)), (${backgroundVideo})`,
-        width: '100%',
-        height: '100%',
-        backgroundSize: 'cover',
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'fitcontent',
+        backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center top 5px',
-        position: 'absolute',
-        marginTop: '10px'
+        minHeight: '1060px',
+        width: '1900px',
+        backgroundAttachment: 'fixed',
     },
     stack: {
         width: '400px',
@@ -69,16 +73,16 @@ interface SubmitProps {
     email: string
     password: string
 }
-export type MessageType = 'error' | 'warning' | 'info' | 'success'
-const GoogleButton = (_props: ButtonProps ) => {
-    const [ open, setOpen ] = useState(false)
-    const [ message, setMessage ] = useState<string>()
-    const [ messageType, setMessageType ] = useState<MessageType>()
-    const navigate = useNavigate()
-    const auth = getAuth()
-    const [ signInWithGoogle, _user, loading, error ] = useSignInWithGoogle(auth)
+const GoogleButton = (_props: ButtonProps) => {
+    const [open, setOpen] = useState(false);
+    const [message, setMessage] = useState<string>();
+    const [messageType, setMessageType] = useState<MessageType>();
+    const navigate = useNavigate();
+    const auth = getAuth();
+    const [signInWithGoogle, _user, loading, error] = useSignInWithGoogle(auth);
+
     const signIn = async () => {
-        await signInWithGoogle()
+        await signInWithGoogle();
         localStorage.setItem('auth', 'true')
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -95,42 +99,50 @@ const GoogleButton = (_props: ButtonProps ) => {
             setMessageType('error')
             setOpen(true)
         }
-        if (loading) {
-            return <CircularProgress />
-        }
+    };
+
+    if (loading) {
+        return <CircularProgress />;
     }
+
     return (
         <Box>
             <Button
-                variant='contained'
-                color='info'
-                size = 'large'
-                sx = { authStyles.button }
-                onClick = { signIn }
+                variant="contained"
+                sx={{
+                    ...authStyles.button,
+                    backgroundColor: 'black',
+                    color: 'white',
+                    '&:hover': {
+                        backgroundColor: 'black',
+                    }
+                }}
+                onClick={signIn}
+                startIcon={<Box component="img" src={googleIcon} alt="Google Sign In" sx={{ width: 80, height: 70 }} />}
             >
-               Sign In With Google 
-            </Button>
+
+</Button>
             <Snackbar
-                open = { open }
+                open={open}
                 autoHideDuration={2000}
-                onClose = { () => setOpen(false) }
+                onClose={() => setOpen(false)}
             >
-                <Alert severity = { messageType }>
+                <Alert severity={messageType}>
                     {message}
                 </Alert>
             </Snackbar>
         </Box>
-    )
-}
+    );
+};
 const SignIn = () => {
-    const [ open, setOpen ] = useState(false)
-    const [ message, setMessage ] = useState<string>()
-    const [ messageType, setMessageType ] = useState<MessageType>()
+    const [open, setOpen] = useState(false)
+    const [message, setMessage] = useState<string>()
+    const [messageType, setMessageType] = useState<MessageType>()
     const navigate = useNavigate()
     const auth = getAuth()
     const { register, handleSubmit } = useForm<SubmitProps>()
     const onSubmit: SubmitHandler<SubmitProps> = async (data, event) => {
-        if (event) event.preventDefault(); 
+        if (event) event.preventDefault();
         signInWithEmailAndPassword(auth, data.email, data.password)
             .then((userCredential) => {
                 const user = userCredential.user;
@@ -151,7 +163,7 @@ const SignIn = () => {
     }
     return (
         <Box>
-            <form onSubmit = { handleSubmit(onSubmit) }>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <Typography variant='h6'>Sign Into Your Account</Typography>
                 <Box>
                     <label htmlFor='email'></label>
@@ -162,9 +174,9 @@ const SignIn = () => {
                 <Button type='submit'>Submit</Button>
             </form>
             <Snackbar
-                open={ open }
-                autoHideDuration= {2000}
-                onClose = { () => setOpen(false) }
+                open={open}
+                autoHideDuration={2000}
+                onClose={() => setOpen(false)}
             >
                 <Alert severity={messageType}>
                     {message}
@@ -174,14 +186,14 @@ const SignIn = () => {
     )
 }
 const SignUp = () => {
-    const [ open, setOpen ] = useState(false)
-    const [ message, setMessage ] = useState<string>()
-    const [ messageType, setMessageType ] = useState<MessageType>()
+    const [open, setOpen] = useState(false)
+    const [message, setMessage] = useState<string>()
+    const [messageType, setMessageType] = useState<MessageType>()
     const navigate = useNavigate()
     const auth = getAuth()
     const { register, handleSubmit } = useForm<SubmitProps>()
     const onSubmit: SubmitHandler<SubmitProps> = async (data, event) => {
-        if (event) event.preventDefault(); 
+        if (event) event.preventDefault();
         createUserWithEmailAndPassword(auth, data.email, data.password)
             .then((userCredential) => {
                 const user = userCredential.user;
@@ -202,7 +214,7 @@ const SignUp = () => {
     }
     return (
         <Box>
-            <form onSubmit = { handleSubmit(onSubmit) }>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <Typography variant='h6'>Sign Up for Free!</Typography>
                 <Box>
                     <label htmlFor='email'></label>
@@ -213,9 +225,9 @@ const SignUp = () => {
                 <Button type='submit'>Submit</Button>
             </form>
             <Snackbar
-                open={ open }
-                autoHideDuration= {2000}
-                onClose = { () => setOpen(false) }
+                open={open}
+                autoHideDuration={2000}
+                onClose={() => setOpen(false)}
             >
                 <Alert severity={messageType}>
                     {message}
@@ -225,72 +237,85 @@ const SignUp = () => {
     )
 }
 export const Auth = (props: Props) => {
-    const [ open, setOpen ] = useState(false)
-    const [ signType, setSignType ] = useState<'signin' | 'signup'>()
+    const [open, setOpen] = useState(false)
+    const [signType, setSignType] = useState<'signin' | 'signup'>()
     return (
-      <Box>
-    <NavBar />
-    <Box sx={authStyles.main}>
-        <Stack
-            direction='column'
-            alignItems='center'
-            textAlign='center'
-            sx={authStyles.stack}
-        >
-            <Typography variant='h3'>
-                {props.title}
-            </Typography>
-            <br />
-            <Typography variant='subtitle1'>
-                - Shop - create - customize -
-            </Typography>
-            <br />
-            <GoogleButton open={open} onClick={ () => setOpen(false)} />
-            <br />
-            <Stack
-                width='100%'
-                alignItems='center'
-                justifyContent='center'
-                direction='row'
-            >
-                <Button
-                    variant='contained'
-                    color='primary'
-                    size='large'
-                    sx={{ ...authStyles.button, padding: '12px 30px' }}
-                    onClick={() => { setOpen(true); setSignType('signin') }}
+        <Box>
+            <NavBar />
+            <Box sx={authStyles.main}>
+                <Stack
+                    direction='column'
+                    alignItems='center'
+                    textAlign='center'
+                    sx={authStyles.stack}
                 >
-                    Email Login
-                </Button>
-                <Button
-                    variant='contained'
-                    color='primary'
-                    size='large'
-                    sx={{ ...authStyles.button, padding: '12px 30px' }}
-                    onClick={() => { setOpen(true); setSignType('signup') }}
+                    <Typography variant='h3'>
+                        {props.title}
+                    </Typography>
+                    <br />
+                    <Typography variant='subtitle1'>
+                        - Shop - create - customize -
+                    </Typography>
+                    <br />
+              <GoogleButton open={open} onClick={ () => setOpen(false)} />
+<br />
+<Stack
+    width='100%'
+    alignItems='center'
+    justifyContent='center'
+    direction='row'
+>
+    <Button
+        variant='contained'
+        sx={{ 
+            ...authStyles.button, 
+            padding: '12px 30px', 
+            backgroundColor: 'black',
+            color: 'white',
+            '&:hover': {
+                backgroundColor: 'black',
+            }
+        }}
+        onClick={() => { setOpen(true); setSignType('signin') }}
+        startIcon={<Box component="img" src={emailIcon} alt="Email Login" sx={{ width: 100, height: 75 }} />}
+    >
+    </Button>
+    <Button
+        variant='contained'
+        sx={{ 
+            ...authStyles.button, 
+            padding: '12px 30px',
+            backgroundColor: 'black',
+            color: 'white',
+            '&:hover': {
+                backgroundColor: 'black',
+            }
+        }}
+        onClick={() => { setOpen(true); setSignType('signup') }}
+        startIcon={<Box component="img" src={emailSignupIcon} alt="Email Signup" sx={{ width: 100, height: 75 }} />}
+    >
+        
+    </Button>
+</Stack>
+                </Stack>
+                <Dialog
+                    open={open}
+                    onClose={() => setOpen(false)}
+                    PaperProps={{
+                        sx: {
+                            backgroundColor: 'black',
+                            borderRadius: '10px',
+                            border: '1px solid white',
+                            boxShadow: '0 0 10px white',
+                        }
+                    }}
                 >
-                    Email Signup
-                </Button>
-            </Stack>
-        </Stack>
-        <Dialog
-            open={open}
-            onClose={() => setOpen(false)}
-            PaperProps={{
-                sx: {
-                    backgroundColor: 'black',
-                    borderRadius: '10px',
-                    border: '1px solid white',
-                    boxShadow: '0 0 10px white',
-                }
-            }}
-        >
-            <DialogContent>
-                {signType === 'signin' ? <SignIn /> : <SignUp />}
-            </DialogContent>
-        </Dialog>
-    </Box>
-</Box>
+                    <DialogContent>
+                        {signType === 'signin' ? <SignIn /> : <SignUp />}
+                    </DialogContent>
+                </Dialog>
+            </Box>
+        </Box>
 
     )
 }
