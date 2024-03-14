@@ -1,0 +1,22 @@
+*, *::before, *::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+h1 {
+font-family: 'Drius', sans-serif;
+}
+.Button:hover {
+  color: #00be00;
+}
+.Button {
+  color: black;
+  border-color: black;
+  box-shadow: inset #00be00;
+  border-width: 20%;
+}
+body {
+  background-color: black;
+  * {cursor: url('./assets/images/Normal Select.cur'), auto !important;}
+}
+
